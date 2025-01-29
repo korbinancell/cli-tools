@@ -1,0 +1,26 @@
+{
+  "name": "tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Random cli tools I thought were neat",
+  "type": "module",
+  "main": "index.mjs",
+  "bin": "index.mjs",
+  "scripts": {
+    "link": "npm pack --pack-destination dist & npm install -g ./dist/tools-0.1.0.tgz",
+    "test": "node index.mjs"
+  },
+  "author": "korbinancell",
+  "license": "MIT",
+  "dependencies": {
+    "clipboardy": "^4.0.0",
+    "commander": "^13.1.0",
+    "ora": "^8.1.1",
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0"
+  }
+}
