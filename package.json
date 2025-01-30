@@ -8,7 +8,8 @@
   "bin": "index.mjs",
   "scripts": {
     "link": "npm pack --pack-destination dist & npm install -g ./dist/tools-0.1.0.tgz",
-    "test": "node index.mjs"
+    "do": "node index.mjs",
+    "test": "node --test"
   },
   "author": "korbinancell",
   "license": "MIT",

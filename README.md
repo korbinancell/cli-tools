@@ -2,6 +2,10 @@ Random cli tools I thought would be neat.
 
 Clone & `npm i` & `npm run link` to use everywhere w/ `tools --help`
 
+## DONE Colors
+
+- RGB -> HEX -> hsla conversion
+
 ## DONE Img manip
 
 - Convert file to webp
@@ -21,10 +25,6 @@ Clone & `npm i` & `npm run link` to use everywhere w/ `tools --help`
 - Enable git w/ common .gitignore
 - Enable eslint (npm init @eslint/config@latest) & add personalized overrides
 - Enable common vscode extensions
-
-## TODO Colors
-
-- RGB -> HEX -> hsla conversion
 
 ## TODO Img manip
 

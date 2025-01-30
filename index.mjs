@@ -4,6 +4,7 @@ import { program } from "commander";
 import clipboard from "clipboardy";
 import { toWebp } from "./src/img-manip.mjs";
 import { toSmallCaps, toSmallText, toUpsideDown, zalgoize } from "./src/text-generator.mjs";
+import { parseCssColor } from "./src/colors.mjs";
 
 const doTextThing = (fn) => (text, opts) => {
   const out = fn(text, opts);
@@ -17,6 +18,15 @@ const doTimedThing = (fn) => async (cmd, opts) => {
   await fn(cmd, opts);
   console.timeEnd("done");
 };
+
+/**
+ * Colors
+ */
+program
+  .command("color")
+  .argument("<color>", "css formatted color (hex, rgb, hsl)")
+  .description("converts a css color to the different formats")
+  .action((color) => console.table(parseCssColor(color)));
 
 /**
  * Img manip
