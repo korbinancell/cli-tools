@@ -82,7 +82,7 @@ export const toWebp = async (source, opts) => {
   }
 
   spinner.succeed(`Found ${files.length} image(s).`);
-  spinner = ora().start("Converting files.");
+  spinner = ora().start("Converting image(s).");
 
   const outDir = path.resolve(process.cwd(), opts.out);
   await fs.mkdir(outDir, { recursive: true });
@@ -103,4 +103,55 @@ export const toWebp = async (source, opts) => {
   }
 
   spinner.succeed(`Converted ${files.length} image(s).`);
+};
+
+/**
+ * Resize image sources
+ *
+ * @param {string} source - Comma separated source files or "." for all in the current folder.
+ * @param {Object} opts - Options.
+ * @param {string} opts.exts - A comma-separated string of file extensions.
+ * @param {number} opts.width
+ * @param {number} opts.height
+ * @param {string} [opts.out] - An optional output directory.
+ * @returns {Promise<void>}
+ */
+export const resizeImg = async (source, opts) => {
+  let spinner = ora().start("Resizing image(s)");
+  const files = await parseFileSources(source, opts.exts, spinner);
+  if (!files) return;
+  if (!files.length) {
+    spinner.warn("No files found");
+    return;
+  }
+
+  spinner.succeed(`Found ${files.length} image(s).`);
+  spinner = ora().start("Resizing image(s)");
+
+  const outDir = path.resolve(process.cwd(), opts.out);
+  await fs.mkdir(outDir, { recursive: true });
+
+  for (const file of files) {
+    const baseName = path.basename(file);
+    const outPath = path.join(outDir, baseName);
+
+    spinner.text = `Resizing "${baseName}"`;
+    try {
+      await sharp(file)
+        .resize({
+          width: parseInt(opts.width),
+          height: parseInt(opts.height),
+          kernel: "nearest",
+          fit: "contain",
+          background: "transparent",
+        })
+        .toFile(outPath);
+    } catch (e) {
+      spinner.fail(`Failed to resize "${file}"`);
+      console.error(e);
+      return;
+    }
+  }
+
+  spinner.succeed(`Resized ${files.length} image(s).`);
 };

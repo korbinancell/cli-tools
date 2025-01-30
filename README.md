@@ -10,6 +10,7 @@ Clone & `npm i` & `npm run link` to use everywhere w/ `tools --help`
 
 - Convert file to webp
 - Convert folder of files to webp
+- Resize img & folder of imgs
 
 ## DONE For fun
 
@@ -28,7 +29,7 @@ Clone & `npm i` & `npm run link` to use everywhere w/ `tools --help`
 
 ## TODO Img manip
 
-- Resize img
+- Resize img options from sharp
 
 ## TODO Json formatting
 

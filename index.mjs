@@ -2,7 +2,7 @@
 
 import { program } from "commander";
 import clipboard from "clipboardy";
-import { toWebp } from "./src/img-manip.mjs";
+import { resizeImg, toWebp } from "./src/img-manip.mjs";
 import { toSmallCaps, toSmallText, toUpsideDown, zalgoize } from "./src/text-generator.mjs";
 import { parseCssColor } from "./src/colors.mjs";
 
@@ -38,6 +38,16 @@ program
   .option("-e, --exts", "img extensions", "png,jpg")
   .description("converts images to webp")
   .action(doTimedThing(toWebp));
+
+program
+  .command("resize")
+  .argument("<source>", 'comma separated source files or "." for all in a folder')
+  .option("--out <text>", "output folder", "./resized")
+  .option("-e, --exts", "img extensions", "webp")
+  .option("-w, --width <number>", "300")
+  .option("-h, --height <number>", "300")
+  .description("resizes images")
+  .action(doTimedThing(resizeImg));
 
 /**
  * For fun
