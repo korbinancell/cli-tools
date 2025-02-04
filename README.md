@@ -12,6 +12,10 @@ Clone & `npm i` & `npm run link` to use everywhere w/ `tools --help`
 - Convert folder of files to webp
 - Resize img & folder of imgs
 
+## DONE Json formatting
+
+- Combine separate files into one
+
 ## DONE For fun
 
 - Text to small text
@@ -38,6 +42,11 @@ Clone & `npm i` & `npm run link` to use everywhere w/ `tools --help`
 - Reformat to new shape
 - Determine data shape from data
 - Query json w/ sql
+
+## TODO steam stuff?
+
+- Get mod ids for subscribed items?
+- lookup steam name
 
 ## TODO For fun
 

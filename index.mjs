@@ -5,6 +5,7 @@ import clipboard from "clipboardy";
 import { resizeImg, toWebp } from "./src/img-manip.mjs";
 import { toSmallCaps, toSmallText, toUpsideDown, zalgoize } from "./src/text-generator.mjs";
 import { parseCssColor } from "./src/colors.mjs";
+import { combineJsonFiles } from "./src/json-formatting.mjs";
 
 const doTextThing = (fn) => (text, opts) => {
   const out = fn(text, opts);
@@ -13,11 +14,13 @@ const doTextThing = (fn) => (text, opts) => {
   if (!opts.skipCopy) clipboard.writeSync(out);
 };
 
-const doTimedThing = (fn) => async (cmd, opts) => {
-  console.time("done");
-  await fn(cmd, opts);
-  console.timeEnd("done");
-};
+const doTimedThing =
+  (fn) =>
+  async (cmd, opts, ...args) => {
+    console.time("done");
+    await fn(cmd, opts, ...args);
+    console.timeEnd("done");
+  };
 
 /**
  * Colors
@@ -48,6 +51,20 @@ program
   .option("-h, --height <number>", "300")
   .description("resizes images")
   .action(doTimedThing(resizeImg));
+
+/**
+ * Json Manip
+ */
+program
+  .command("json-zip")
+  .argument("<source>", "source dir path")
+  .argument("[output]", "output dir path", ".")
+  .description("combines all json files in a directory into one")
+  .action(
+    doTimedThing(async (src, out) => {
+      console.table(await combineJsonFiles(src, out));
+    })
+  );
 
 /**
  * For fun
